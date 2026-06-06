@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Production Dashboard — Concept Medical</title>
+<link rel="stylesheet" href="css/colors_and_type.css" />
+<link rel="stylesheet" href="css/dashboard.css" />
+<link rel="icon" href="assets/mark-cm-blue.png" />
+</head>
+<body>
+<template id="__bundler_thumbnail" data-bg-color="#122248">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#122248"/>
+    <g transform="translate(360 250)">
+      <rect x="0" y="180" width="70" height="120" rx="6" fill="#1D4E9F"/>
+      <rect x="105" y="120" width="70" height="180" rx="6" fill="#00B7F1"/>
+      <rect x="210" y="60" width="70" height="240" rx="6" fill="#1D4E9F"/>
+      <rect x="315" y="140" width="70" height="160" rx="6" fill="#00B7F1"/>
+      <rect x="420" y="40" width="70" height="260" rx="6" fill="#1D4E9F"/>
+      <polyline points="35,170 140,110 245,50 350,130 455,30" fill="none" stroke="#97DAF8" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="35" cy="170" r="11" fill="#fff"/><circle cx="245" cy="50" r="11" fill="#fff"/><circle cx="455" cy="30" r="11" fill="#fff"/>
+    </g>
+    <text x="600" y="600" text-anchor="middle" fill="#ffffff" font-family="Poppins, sans-serif" font-size="46" font-weight="600" letter-spacing="1">Production Dashboard</text>
+    <text x="600" y="650" text-anchor="middle" fill="#97DAF8" font-family="Poppins, sans-serif" font-size="24" font-weight="500" letter-spacing="4">CONCEPT MEDICAL</text>
+  </svg>
+</template>
+<div class="app">
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar">
+    <div class="sidebar__brand">
+      <img src="assets/logo-cm-horizontal-white.png" alt="Concept Medical" />
+      <div class="sidebar__brand-sub">Manufacturing Intelligence</div>
+    </div>
+    <nav class="sidebar__nav">
+      <div class="nav-section-label">Operations</div>
+      <a class="nav-item is-active" data-target="sec-overview" href="#sec-overview"><i data-lucide="layout-dashboard"></i> Production Overview</a>
+      <a class="nav-item" data-target="sec-mfg" href="#sec-mfg"><i data-lucide="cog"></i> Manufacturing</a>
+      <a class="nav-item" data-target="sec-quality" href="#sec-quality"><i data-lucide="shield-check"></i> Quality Metrics</a>
+      <div class="nav-section-label">Supply & Goals</div>
+      <a class="nav-item" data-target="sec-inventory" href="#sec-inventory"><i data-lucide="boxes"></i> Inventory & Material</a>
+      <a class="nav-item" data-target="sec-targets" href="#sec-targets"><i data-lucide="target"></i> Targets vs Achievement</a>
+      <a class="nav-item" data-target="sec-alerts" href="#sec-alerts"><i data-lucide="triangle-alert"></i> Alerts & Issues <span class="nav-badge">6</span></a>
+    </nav>
+    <div class="sidebar__footer">
+      <strong>Envision Scientific — SEZ</strong>
+      Sachin, Surat · Plant Operations<br />
+      FY 26–27 · Updated 06 Jun 2026
+    </div>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <main class="main">
+
+    <!-- Command / filter bar -->
+    <header class="commandbar">
+      <div class="commandbar__title">
+        <h1>Production Dashboard</h1>
+        <p id="filterSubtitle">Unit SEZ · April · FY 26-27</p>
+      </div>
+      <div class="commandbar__filters">
+        <div class="filter">
+          <label for="fUnit">Unit</label>
+          <select id="fUnit"><option>SEZ</option><option>DTA</option><option>All Units</option></select>
+        </div>
+        <div class="filter">
+          <label for="fBatch">Batch</label>
+          <select id="fBatch"><option>SA200</option><option>SA201</option><option>All Batches</option></select>
+        </div>
+        <div class="filter">
+          <label for="fFY">Fiscal Year</label>
+          <select id="fFY"><option>26-27</option><option>25-26</option><option>24-25</option></select>
+        </div>
+        <div class="filter">
+          <label for="fMonth">Month</label>
+          <select id="fMonth"><option>April</option><option>May</option><option>June</option><option>YTD</option></select>
+        </div>
+        <button class="iconbtn" id="themeToggle" title="Toggle theme" aria-label="Toggle theme"><i data-lucide="contrast"></i></button>
+        <button class="iconbtn" title="Export" aria-label="Export"><i data-lucide="download"></i></button>
+      </div>
+    </header>
+
+    <div class="content">
+
+      <!-- ============ KPI STRIP ============ -->
+      <section id="sec-overview" class="section">
+        <div class="kpi-strip">
+          <div class="kpi">
+            <div class="kpi__label"><i data-lucide="factory"></i> Units Produced · MTD</div>
+            <div class="kpi__value">118.2<span class="unit">K</span></div>
+            <div class="kpi__foot"><span class="trend up"><i data-lucide="trending-up"></i> 12%</span> <span class="vs">vs last month</span></div>
+          </div>
+          <div class="kpi is-good">
+            <div class="kpi__label"><i data-lucide="gauge"></i> Plan Attainment</div>
+            <div class="kpi__value">98<span class="unit">%</span></div>
+            <div class="kpi__foot"><span class="trend up"><i data-lucide="trending-up"></i> 6 pts</span> <span class="vs">118.2K of 120K</span></div>
+          </div>
+          <div class="kpi is-good">
+            <div class="kpi__label"><i data-lucide="battery-charging"></i> Capacity Utilization</div>
+            <div class="kpi__value">85<span class="unit">%</span></div>
+            <div class="kpi__foot"><span class="trend up"><i data-lucide="trending-up"></i> 3 pts</span> <span class="vs">target 88%</span></div>
+          </div>
+          <div class="kpi is-good">
+            <div class="kpi__label"><i data-lucide="check-check"></i> Yield · FPY</div>
+            <div class="kpi__value">92<span class="unit">%</span></div>
+            <div class="kpi__foot"><span class="trend up"><i data-lucide="trending-up"></i> 1.5 pts</span> <span class="vs">target 95%</span></div>
+          </div>
+          <div class="kpi is-warn">
+            <div class="kpi__label"><i data-lucide="percent"></i> Rejection Rate</div>
+            <div class="kpi__value">8.5<span class="unit">%</span></div>
+            <div class="kpi__foot"><span class="trend down"><i data-lucide="trending-down"></i> 0.7 pts</span> <span class="vs">target ≤ 5%</span></div>
+          </div>
+          <div class="kpi">
+            <div class="kpi__label"><i data-lucide="layers"></i> Batches</div>
+            <div class="kpi__value">6 <span class="unit">running</span></div>
+            <div class="kpi__foot"><span class="trend flat"><i data-lucide="circle-check-big"></i> 12 completed</span> <span class="vs">· 1 failed</span></div>
+          </div>
+        </div>
+
+        <!-- Production Overview header -->
+        <div class="section__head">
+          <span class="eyebrow">01</span>
+          <h2>Production Overview</h2>
+          <span class="meta">Capacity, demand & plan attainment</span>
+        </div>
+        <div class="section__rule"></div>
+
+        <div class="grid g-21">
+          <div class="card">
+            <div class="card__head">
+              <span class="card__icon"><i data-lucide="chart-column-big"></i></span>
+              <h3>Capacity vs Demand vs Confirmed Orders</h3>
+              <span class="sub">Units · thousands</span>
+            </div>
+            <div class="legend" style="margin-bottom:14px;">
+              <span class="li"><span class="dot" style="background:var(--cm-blue-500)"></span> Capacity</span>
+              <span class="li"><span class="dot" style="background:var(--cm-blue-200)"></span> Demand</span>
+              <span class="li"><span class="dot line" style="background:var(--cm-blue-700)"></span> Confirmed Orders</span>
+            </div>
+            <div class="chart-wrap" style="height:260px;"><canvas id="chartCapacityDemand"></canvas></div>
+          </div>
+
+          <div class="insight">
+            <span class="eyebrow">Executive Read</span>
+            <p><strong>Demand has outpaced capacity in 5 of the last 6 months</strong>, peaking at 142K in June against 122K of available capacity.</p>
+            <p>Confirmed orders are climbing steadily — up <strong>124%</strong> since January. A <em class="editorial">capacity expansion review</em> at the SEZ line is warranted to protect fulfillment.</p>
+            <div class="stat-inline" style="margin-top:6px;">
+              <div class="si"><b>20K</b><span>Jun demand gap</span></div>
+              <div class="si"><b>+124%</b><span>order growth YTD</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid g-2" style="margin-top:14px;">
+          <div class="card">
+            <div class="card__head">
+              <span class="card__icon"><i data-lucide="chart-no-axes-column"></i></span>
+              <h3>Production Plan vs Actual</h3>
+              <span class="sub">Units · thousands</span>
+            </div>
+            <div class="legend" style="margin-bottom:14px;">
+              <span class="li"><span class="dot" style="background:var(--cm-blue-700)"></span> Planned</span>
+              <span class="li"><span class="dot" style="background:var(--cm-blue-200)"></span> Actual</span>
+            </div>
+            <div class="chart-wrap" style="height:230px;"><canvas id="chartPlanActual"></canvas></div>
+          </div>
+          <div class="card">
+            <div class="card__head">
+              <span class="card__icon"><i data-lucide="calendar-range"></i></span>
+              <h3>Finished Goods Output by Month</h3>
+              <span class="sub">Units · thousands</span>
+            </div>
+            <div class="chart-wrap" style="height:262px;margin-top:8px;"><canvas id="chartProductionFG"></canvas></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ MANUFACTURING ============ -->
+      <section id="sec-mfg" class="section">
+        <div class="section__head">
+          <span class="eyebrow">02</span>
+          <h2>Manufacturing Performance</h2>
+          <span class="meta">Batch execution & machine load</span>
+        </div>
+        <div class="section__rule"></div>
+
+        <div class="grid g-21">
+          <div class="card">
+            <div class="card__head">
+              <span class="card__icon"><i data-lucide="gantt-chart"></i></span>
+              <h3>Batch Progress Overview</h3>
+              <span class="sub">Live · shift timeline</span>
+            </div>
+            <div class="legend" style="margin-bottom:14px;">
+              <span class="li"><span class="dot" style="background:var(--neutral-300)"></span> Scheduled</span>
+              <span class="li"><span class="dot" style="background:var(--cm-blue-500)"></span> Running</span>
+              <span class="li"><span class="dot" style="background:var(--warning)"></span> Paused</span>
+              <span class="li"><span class="dot" style="background:var(--success)"></span> Completed</span>
+              <span class="li"><span class="dot" style="background:var(--danger)"></span> Failed</span>
+            </div>
+            <div class="gantt">
+              <div class="gantt__axis">
+                <span></span>
+                <div class="gantt__ticks"><span>06:00</span><span>09:00</span><span>12:00</span><span>15:00</span><span>18:00</span></div>
+              </div>
+              <div class="gantt__row"><span class="gantt__label">Batch 101</span><div class="gantt__track">
+                <span class="gantt__bar scheduled" style="left:2%;width:14%"></span>
+                <span class="gantt__bar running" style="left:16%;width:28%"></span>
+                <span class="gantt__bar completed" style="left:44%;width:24%"></span>
+              </div></div>
+              <div class="gantt__row"><span class="gantt__label">Batch 102</span><div class="gantt__track">
+                <span class="gantt__bar scheduled" style="left:8%;width:12%"></span>
+                <span class="gantt__bar running" style="left:20%;width:30%"></span>
+                <span class="gantt__bar paused" style="left:50%;width:12%"></span>
+                <span class="gantt__bar running" style="left:62%;width:20%"></span>
+              </div></div>
+              <div class="gantt__row"><span class="gantt__label">Batch 103</span><div class="gantt__track">
+                <span class="gantt__bar scheduled" style="left:10%;width:8%"></span>
+                <span class="gantt__bar running" style="left:18%;width:22%"></span>
+                <span class="gantt__bar paused" style="left:40%;width:10%"></span>
+                <span class="gantt__bar running" style="left:50%;width:22%"></span>
+                <span class="gantt__bar completed" style="left:72%;width:14%"></span>
+              </div></div>
+              <div class="gantt__row"><span class="gantt__label">Batch 104</span><div class="gantt__track">
+                <span class="gantt__bar scheduled" style="left:6%;width:16%"></span>
+                <span class="gantt__bar running" style="left:22%;width:28%"></span>
+                <span class="gantt__bar paused" style="left:50%;width:10%"></span>
+                <span class="gantt__bar running" style="left:60%;width:20%"></span>
+              </div></div>
+              <div class="gantt__row"><span class="gantt__label">Batch 105</span><div class="gantt__track">
+                <span class="gantt__bar scheduled" style="left:12%;width:14%"></span>
+                <span class="gantt__bar running" style="left:26%;width:20%"></span>
+                <span class="gantt__bar paused" style="left:46%;width:12%"></span>
+                <span class="gantt__bar failed" style="left:58%;width:16%"></span>
+              </div></div>
+              <div class="gantt__row"><span class="gantt__label">Batch 106</span><div class="gantt__track">
+                <span class="gantt__bar scheduled" style="left:20%;width:14%"></span>
+                <span class="gantt__bar running" style="left:34%;width:24%"></span>
+                <span class="gantt__bar completed" style="left:58%;width:20%"></span>
+              </div></div>
+              <div class="gantt__row"><span class="gantt__label">Batch 107</span><div class="gantt__track">
+                <span class="gantt__bar scheduled" style="left:14%;width:26%"></span>
+                <span class="gantt__bar running" style="left:40%;width:30%"></span>
+              </div></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card__head">
+              <span class="card__icon"><i data-lucide="cpu"></i></span>
+              <h3>Machine Load Distribution</h3>
+              <span class="sub">% of line load</span>
+            </div>
+            <p class="footnote" style="margin:-6px 0 14px;">Red indicates over-utilized machines (bottleneck risk); green indicates spare capacity.</p>
+            <div class="mload">
+              <div class="mload__row"><span class="mload__id">M002</span><div class="mload__bar"><div class="mload__fill" data-w="89%" style="width:0;background:var(--danger)"></div></div><span class="mload__val" style="color:var(--danger)">24.7%</span></div>
+              <div class="mload__row"><span class="mload__id">M008</span><div class="mload__bar"><div class="mload__fill" data-w="83%" style="width:0;background:var(--danger)"></div></div><span class="mload__val" style="color:var(--danger)">23.1%</span></div>
+              <div class="mload__row"><span class="mload__id">M001</span><div class="mload__bar"><div class="mload__fill" data-w="79%" style="width:0;background:var(--warning)"></div></div><span class="mload__val" style="color:var(--warning)">22.0%</span></div>
+              <div class="mload__row"><span class="mload__id">M009</span><div class="mload__bar"><div class="mload__fill" data-w="79%" style="width:0;background:var(--warning)"></div></div><span class="mload__val" style="color:var(--warning)">21.9%</span></div>
+              <div class="mload__row"><span class="mload__id">M010</span><div class="mload__bar"><div class="mload__fill" data-w="78%" style="width:0;background:var(--warning)"></div></div><span class="mload__val" style="color:var(--warning)">21.8%</span></div>
+              <div class="mload__row"><span class="mload__id">M003</span><div class="mload__bar"><div class="mload__fill" data-w="78%" style="width:0;background:var(--warning)"></div></div><span class="mload__val" style="color:var(--warning)">21.7%</span></div>
+              <div class="mload__row"><span class="mload__id">M007</span><div class="mload__bar"><div class="mload__fill" data-w="76%" style="width:0;background:var(--warning)"></div></div><span class="mload__val" style="color:var(--warning)">21.0%</span></div>
+              <div class="mload__row"><span class="mload__id">M006</span><div class="mload__bar"><div class="mload__fill" data-w="60%" style="width:0;background:var(--success)"></div></div><span class="mload__val" style="color:var(--success)">16.7%</span></div>
+              <div class="mload__row"><span class="mload__id">M004</span><div class="mload__bar"><div class="mload__fill" data-w="44%" style="width:0;background:var(--success)"></div></div><span class="mload__val" style="color:var(--success)">12.2%</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid g-21" style="margin-top:14px;">
+          <div class="card">
+            <div class="card__head">
+              <span class="card__icon"><i data-lucide="package"></i></span>
+              <h3>Finished Goods Output by Item</h3>
+              <span class="sub">Units · thousands</span>
+            </div>
+            <div class="chart-wrap" style="height:240px;margin-top:6px;"><canvas id="chartProductionItem"></canvas></div>
+          </div>
+          <div class="card">
+            <div class="card__head">
+              <span class="card__icon"><i data-lucide="activity"></i></span>
+              <h3>Line Efficiency</h3>
+            </div>
+            <div class="stat-inline" style="gap:20px;row-gap:20px;">
+              <div class="si"><b>20.2%</b><span>Avg machine load</span></div>
+              <div class="si"><b>6.4 hrs</b><span>Mean batch cycle</span></div>
+              <div class="si"><b>3.1%</b><span>Unplanned downtime</span></div>
+              <div class="si"><b>1.8 hrs</b><span>Paused time today</span></div>
+            </div>
+            <div class="section__rule" style="margin:18px 0 16px;"></div>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <div style="display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--fg-muted);"><span class="badge bad"><i data-lucide="arrow-up"></i> Bottleneck</span> M002 &amp; M008 carry 48% of total load</div>
+              <div style="display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--fg-muted);"><span class="badge ok"><i data-lucide="arrow-down"></i> Spare</span> M004 &amp; M006 below 17% — rebalance candidates</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ QUALITY ============ -->
+      <section id="sec-quality" class="section">
+        <div class="section__head">
+          <span class="eyebrow">03</span>
+          <h2>Quality Metrics</h2>
+          <span class="meta">Yield, first-pass &amp; rejection drivers</span>
+        </div>
+        <div class="section__rule"></div>
+
+        <div class="grid g-21">
+          <div class="card">
+            <div class="card__head">
+              <span class="card__icon"><i data-lucide="chart-column-decreasing"></i></span>
+              <h3>Rejection Reasons — Pareto Analysis</h3>
+              <span class="sub">Count &amp; cumulative %</span>
+            </div>
+            <div class="legend" style="margin-bottom:10px;">
+              <span class="li"><span class="dot" style="background:var(--cm-blue-500)"></span> Rejections</span>
+              <span class="li"><span class="dot line" style="background:var(--warning)"></span> Cumulative %</span>
+            </div>
+            <div class="chart-wrap" style="height:248px;"><canvas id="chartPareto"></canvas></div>
+            <p class="footnote">Top 3 causes — Material Defect, Surface Flaw &amp; Machine Error — drive <strong>74%</strong> of all rejections.</p>
+          </div>
+
+          <div class="card">
+            <div class="card__head">
+              <span class="card__icon"><i data-lucide="shield-check"></i></span>
+              <h3>Quality Snapshot</h3>
+            </div>
+            <div class="grid g-2" style="gap:10px;">
+              <div style="text-align:center;">
+                <div class="chart-wrap" style="height:120px;position:relative;">
+                  <canvas id="chartYield"></canvas>
+                  <div class="donut-center"><span class="big">92%</span><span class="lbl">Yield</span></div>
+                </div>
+              </div>
+              <div style="text-align:center;">
+                <div class="chart-wrap" style="height:120px;position:relative;">
+                  <canvas id="chartFPY"></canvas>
+                  <div class="donut-center"><span class="big">91.5%</span><span class="lbl">First Pass</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="section__rule" style="margin:16px 0;"></div>
+            <div style="display:flex;flex-direction:column;gap:11px;">
+              <div style="display:flex;align-items:center;justify-content:space-between;"><span style="font-size:12.5px;color:var(--fg-muted);">Total Rejection Rate</span><span class="badge warn"><i data-lucide="percent"></i> 8.5%</span></div>
+              <div style="display:flex;align-items:center;justify-content:space-between;"><span style="font-size:12.5px;color:var(--fg-muted);">Rework Rate</span><span class="badge info">3.2%</span></div>
+              <div style="display:flex;align-items:center;justify-content:space-between;"><span style="font-size:12.5px;color:var(--fg-muted);">Scrap Rate</span><span class="badge neutral">2.1%</span></div>
+              <div style="display:flex;align-items:center;justify-content:space-between;"><span style="font-size:12.5px;color:var(--fg-muted);">NCRs open this month</span><span class="badge bad"><i data-lucide="file-warning"></i> 4</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ INVENTORY ============ -->
+      <section id="sec-inventory" class="section">
+        <div class="section__head">
+          <span class="eyebrow">04</span>
+          <h2>Inventory &amp; Material Status</h2>
+          <span class="meta">Raw material coverage &amp; reorder risk</span>
+        </div>
+        <div class="section__rule"></div>
+
+        <div class="grid g-21">
+          <div class="card">
+            <div class="card__head">
+              <span class="card__icon"><i data-lucide="boxes"></i></span>
+              <h3>Material Stock Levels</h3>
+              <span class="sub">On-hand vs reorder point</span>
+            </div>
+            <table class="inv">
+              <thead><tr><th>Material</th><th class="num">On hand</th><th class="num">Reorder pt</th><th>Coverage</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td class="mat">Sirolimus API <small>Drug coating</small></td>
+                  <td class="num">1.2 kg</td><td class="num">1.5 kg</td>
+                  <td><div class="inv-meter"><span style="width:38%;background:var(--danger)"></span></div></td>
+                  <td><span class="badge bad"><i data-lucide="alert-circle"></i> Reorder</span></td>
+                </tr>
+                <tr>
+                  <td class="mat">Co-Cr Stent Tubing <small>Abluminus platform</small></td>
+                  <td class="num">18,400</td><td class="num">8,000</td>
+                  <td><div class="inv-meter"><span style="width:88%;background:var(--success)"></span></div></td>
+                  <td><span class="badge ok"><i data-lucide="check"></i> Healthy</span></td>
+                </tr>
+                <tr>
+                  <td class="mat">Balloon Catheter Substrate <small>MagicTouch family</small></td>
+                  <td class="num">9,600</td><td class="num">6,000</td>
+                  <td><div class="inv-meter"><span style="width:72%;background:var(--success)"></span></div></td>
+                  <td><span class="badge ok"><i data-lucide="check"></i> Healthy</span></td>
+                </tr>
+                <tr>
+                  <td class="mat">Guidewires 0.014" <small>Delivery system</small></td>
+                  <td class="num">5,200</td><td class="num">6,500</td>
+                  <td><div class="inv-meter"><span style="width:44%;background:var(--warning)"></span></div></td>
+                  <td><span class="badge warn"><i data-lucide="alert-triangle"></i> Low</span></td>
+                </tr>
+                <tr>
+                  <td class="mat">Sterile Pouches <small>Primary packaging</small></td>
+                  <td class="num">14,800</td><td class="num">10,000</td>
+                  <td><div class="inv-meter"><span style="width:80%;background:var(--success)"></span></div></td>
+                  <td><span class="badge ok"><i data-lucide="check"></i> Healthy</span></td>
+                </tr>
+                <tr>
+                  <td class="mat">Crimping Dies <small>Consumable tooling</small></td>
+                  <td class="num">42</td><td class="num">60</td>
+                  <td><div class="inv-meter"><span style="width:46%;background:var(--warning)"></span></div></td>
+                  <td><span class="badge warn"><i data-lucide="alert-triangle"></i> Low</span></td>
+                </tr>
+              </tbody>
+            </table>
+            <p class="footnote illustrative">Inventory figures are placeholder data — connect to ERP / WMS to populate live stock levels.</p>
+          </div>
+
+          <div class="card">
+            <div class="card__head">
+              <span class="card__icon"><i data-lucide="clipboard-list"></i></span>
+              <h3>Material Risk</h3>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:16px;">
+              <div style="display:flex;align-items:center;gap:14px;">
+                <div style="font-size:34px;font-weight:700;color:var(--danger);line-height:1;letter-spacing:-0.02em;">1</div>
+                <div><div style="font-size:12.5px;font-weight:600;color:var(--cm-blue-700);">Critical — reorder now</div><div style="font-size:11.5px;color:var(--fg-muted);">Sirolimus API below safety stock</div></div>
+              </div>
+              <div style="display:flex;align-items:center;gap:14px;">
+                <div style="font-size:34px;font-weight:700;color:var(--warning);line-height:1;letter-spacing:-0.02em;">2</div>
+                <div><div style="font-size:12.5px;font-weight:600;color:var(--cm-blue-700);">Low — monitor</div><div style="font-size:11.5px;color:var(--fg-muted);">Guidewires, Crimping Dies</div></div>
+              </div>
+              <div style="display:flex;align-items:center;gap:14px;">
+                <div style="font-size:34px;font-weight:700;color:var(--success);line-height:1;letter-spacing:-0.02em;">3</div>
+                <div><div style="font-size:12.5px;font-weight:600;color:var(--cm-blue-700);">Healthy</div><div style="font-size:11.5px;color:var(--fg-muted);">Tubing, substrate, packaging</div></div>
+              </div>
+            </div>
+            <div class="section__rule" style="margin:18px 0 14px;"></div>
+            <div class="stat-inline"><div class="si"><b>11 days</b><span>Min coverage (API)</span></div><div class="si"><b>₹4.2 Cr</b><span>Inventory value</span></div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ TARGETS ============ -->
+      <section id="sec-targets" class="section">
+        <div class="section__head">
+          <span class="eyebrow">05</span>
+          <h2>Targets vs Achievement</h2>
+          <span class="meta">Monthly attainment by product</span>
+        </div>
+        <div class="section__rule"></div>
+
+        <div class="grid g-2">
+          <div class="card">
+            <div class="card__head">
+              <span class="card__icon"><i data-lucide="target"></i></span>
+              <h3>Output Target Attainment</h3>
+              <span class="sub">April · vs target</span>
+            </div>
+            <div class="target">
+              <div class="target__row">
+                <div class="target__top"><span class="target__name">Total Output</span><span class="target__nums"><b>118.2K</b> / 120K</span></div>
+                <div style="display:flex;align-items:center;gap:12px;"><div class="target__bar" style="flex:1;"><div class="target__fill" data-w="98%" style="width:0;background:var(--cm-blue-500)"></div><div class="target__marker" style="left:100%"></div></div><span class="target__pct" style="color:var(--cm-blue-600)">98%</span></div>
+              </div>
+              <div class="target__row">
+                <div class="target__top"><span class="target__name">Magic Touch SCBC</span><span class="target__nums"><b>8.48K</b> / 9.0K</span></div>
+                <div style="display:flex;align-items:center;gap:12px;"><div class="target__bar" style="flex:1;"><div class="target__fill" data-w="94%" style="width:0;background:var(--cm-blue-500)"></div><div class="target__marker" style="left:100%"></div></div><span class="target__pct" style="color:var(--cm-blue-600)">94%</span></div>
+              </div>
+              <div class="target__row">
+                <div class="target__top"><span class="target__name">Magic Touch PTA</span><span class="target__nums"><b>4.99K</b> / 4.5K</span></div>
+                <div style="display:flex;align-items:center;gap:12px;"><div class="target__bar" style="flex:1;"><div class="target__fill" data-w="100%" style="width:0;background:var(--success)"></div><div class="target__marker" style="left:90%"></div></div><span class="target__pct" style="color:var(--success)">111%</span></div>
+              </div>
+              <div class="target__row">
+                <div class="target__top"><span class="target__name">Semi Finish Balloon</span><span class="target__nums"><b>4.09K</b> / 4.0K</span></div>
+                <div style="display:flex;align-items:center;gap:12px;"><div class="target__bar" style="flex:1;"><div class="target__fill" data-w="100%" style="width:0;background:var(--success)"></div><div class="target__marker" style="left:98%"></div></div><span class="target__pct" style="color:var(--success)">102%</span></div>
+              </div>
+              <div class="target__row">
+                <div class="target__top"><span class="target__name">Abluminus SECSS</span><span class="target__nums"><b>1.63K</b> / 2.0K</span></div>
+                <div style="display:flex;align-items:center;gap:12px;"><div class="target__bar" style="flex:1;"><div class="target__fill" data-w="82%" style="width:0;background:var(--warning)"></div><div class="target__marker" style="left:100%"></div></div><span class="target__pct" style="color:var(--warning)">82%</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card__head">
+              <span class="card__icon"><i data-lucide="trending-up"></i></span>
+              <h3>Quarter &amp; Yield Goals</h3>
+            </div>
+            <div class="target">
+              <div class="target__row">
+                <div class="target__top"><span class="target__name">Q1 Production <small>cumulative</small></span><span class="target__nums"><b>342K</b> / 360K</span></div>
+                <div style="display:flex;align-items:center;gap:12px;"><div class="target__bar" style="flex:1;"><div class="target__fill" data-w="95%" style="width:0;background:var(--cm-blue-500)"></div><div class="target__marker" style="left:100%"></div></div><span class="target__pct" style="color:var(--cm-blue-600)">95%</span></div>
+              </div>
+              <div class="target__row">
+                <div class="target__top"><span class="target__name">Yield Goal <small>FPY</small></span><span class="target__nums"><b>92%</b> / 95%</span></div>
+                <div style="display:flex;align-items:center;gap:12px;"><div class="target__bar" style="flex:1;"><div class="target__fill" data-w="97%" style="width:0;background:var(--cm-blue-500)"></div><div class="target__marker" style="left:100%"></div></div><span class="target__pct" style="color:var(--cm-blue-600)">97%</span></div>
+              </div>
+              <div class="target__row">
+                <div class="target__top"><span class="target__name">Capacity Utilization</span><span class="target__nums"><b>85%</b> / 88%</span></div>
+                <div style="display:flex;align-items:center;gap:12px;"><div class="target__bar" style="flex:1;"><div class="target__fill" data-w="97%" style="width:0;background:var(--cm-blue-500)"></div><div class="target__marker" style="left:100%"></div></div><span class="target__pct" style="color:var(--cm-blue-600)">97%</span></div>
+              </div>
+              <div class="target__row">
+                <div class="target__top"><span class="target__name">Rejection Reduction <small>≤ 5%</small></span><span class="target__nums"><b>8.5%</b> actual</span></div>
+                <div style="display:flex;align-items:center;gap:12px;"><div class="target__bar" style="flex:1;"><div class="target__fill" data-w="59%" style="width:0;background:var(--warning)"></div><div class="target__marker" style="left:100%"></div></div><span class="target__pct" style="color:var(--warning)">59%</span></div>
+              </div>
+            </div>
+            <p class="footnote">Marker shows the 100% target line. Bars capped at 100% of target for readability.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ ALERTS ============ -->
+      <section id="sec-alerts" class="section">
+        <div class="section__head">
+          <span class="eyebrow">06</span>
+          <h2>Alerts &amp; Critical Issues</h2>
+          <span class="meta">6 open · 2 high priority</span>
+        </div>
+        <div class="section__rule"></div>
+
+        <div class="grid g-21">
+          <div class="card">
+            <div class="alerts">
+              <div class="alert sev-high">
+                <span class="alert__dot"><i data-lucide="gauge"></i></span>
+                <div class="alert__body">
+                  <div class="alert__title">Machine M002 over-utilized at 24.7% <span class="badge bad">High</span></div>
+                  <div class="alert__desc">M002 and M008 together carry 48% of line load, creating a throughput bottleneck. Rebalance toward M004 and M006, both running below 17%.</div>
+                  <div class="alert__meta">Manufacturing · bottleneck risk</div>
+                </div>
+              </div>
+              <div class="alert sev-high">
+                <span class="alert__dot"><i data-lucide="x-octagon"></i></span>
+                <div class="alert__body">
+                  <div class="alert__title">Batch 105 failed mid-run <span class="badge bad">High</span></div>
+                  <div class="alert__desc">Batch 105 entered a failed state after a paused phase. Quality hold raised — root-cause investigation required before disposition.</div>
+                  <div class="alert__meta">Quality · NCR pending</div>
+                </div>
+              </div>
+              <div class="alert sev-med">
+                <span class="alert__dot"><i data-lucide="trending-down"></i></span>
+                <div class="alert__body">
+                  <div class="alert__title">May output fell 22% below plan <span class="badge warn">Medium</span></div>
+                  <div class="alert__desc">Actual output of 61K against a 78K plan — the largest negative variance of the period. Confirm staffing and material availability for the May line.</div>
+                  <div class="alert__meta">Production · plan variance</div>
+                </div>
+              </div>
+              <div class="alert sev-med">
+                <span class="alert__dot"><i data-lucide="percent"></i></span>
+                <div class="alert__body">
+                  <div class="alert__title">Rejection rate 8.5% — above 5% target <span class="badge warn">Medium</span></div>
+                  <div class="alert__desc">Material Defect alone accounts for 33% of rejections. Supplier incoming-quality review and a surface-flaw containment action are recommended.</div>
+                  <div class="alert__meta">Quality · CAPA candidate</div>
+                </div>
+              </div>
+              <div class="alert sev-med">
+                <span class="alert__dot"><i data-lucide="package-x"></i></span>
+                <div class="alert__body">
+                  <div class="alert__title">Sirolimus API below reorder point <span class="badge warn">Medium</span></div>
+                  <div class="alert__desc">On-hand 1.2 kg against a 1.5 kg reorder point — roughly 11 days of coverage. Procurement action needed to protect coated-product lines.</div>
+                  <div class="alert__meta">Inventory · supply risk</div>
+                </div>
+              </div>
+              <div class="alert sev-low">
+                <span class="alert__dot"><i data-lucide="chart-column-big"></i></span>
+                <div class="alert__body">
+                  <div class="alert__title">Demand outpacing capacity <span class="badge info">Low</span></div>
+                  <div class="alert__desc">Demand exceeded capacity in 5 of 6 months with order growth of 124% YTD. Flag for the capacity-expansion review at the SEZ line.</div>
+                  <div class="alert__meta">Planning · strategic</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="insight">
+            <span class="eyebrow">What needs a decision</span>
+            <p><strong>Two issues need attention this week:</strong> the M002/M008 load imbalance and the Batch 105 failure. Both are contained but unresolved.</p>
+            <p>The throughput ceiling is structural — <em class="editorial">demand is now consistently above capacity.</em> Pair the load rebalance with the expansion review to convert the confirmed-order backlog.</p>
+            <div class="stat-inline" style="margin-top:6px;">
+              <div class="si"><b>2</b><span>High priority</span></div>
+              <div class="si"><b>3</b><span>Medium</span></div>
+              <div class="si"><b>1</b><span>Strategic</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/dashboard.js"></script>
+<script>
+  if (window.lucide) lucide.createIcons();
+</script>
+</body>
+</html>

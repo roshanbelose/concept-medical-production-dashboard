@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Power BI Build Sheet — Concept Medical Production Dashboard</title>
+<link rel="stylesheet" href="css/colors_and_type.css" />
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--neutral-100); color: var(--neutral-800); font-family: var(--font-brand); }
+  .doc { max-width: 1080px; margin: 0 auto; padding: 48px 56px 80px; background: #fff; min-height: 100vh; }
+  .topbar { background: var(--cm-blue-900); margin: -48px -56px 36px; padding: 28px 56px; display: flex; align-items: center; gap: 20px; }
+  .topbar img { height: 30px; }
+  .topbar .t { color: #fff; }
+  .topbar .eyebrow { color: var(--cm-blue-100); margin-bottom: 4px; }
+  .topbar h1 { color: #fff; font-size: 22px; font-weight: 600; }
+  h2 { font-size: 16px; color: var(--cm-blue-700); margin: 38px 0 6px; letter-spacing: -0.01em; }
+  .rule { height: 1px; background: var(--border); margin: 8px 0 18px; }
+  p.lead { color: var(--neutral-600); font-size: 14px; max-width: 70ch; }
+
+  .swatches { display: flex; flex-wrap: wrap; gap: 10px; margin: 8px 0 4px; }
+  .sw { display: flex; align-items: center; gap: 9px; border: 1px solid var(--border); border-radius: var(--radius-md); padding: 8px 12px 8px 8px; font-size: 12px; }
+  .sw .chip { width: 26px; height: 26px; border-radius: 6px; box-shadow: var(--shadow-inset); }
+  .sw b { font-weight: 600; color: var(--cm-blue-800); }
+  .sw span { color: var(--fg-muted); font-variant-numeric: tabular-nums; }
+  .sw em { font-style: normal; color: var(--fg-subtle); font-size: 11px; }
+
+  table { width: 100%; border-collapse: collapse; margin: 10px 0 4px; }
+  th { text-align: left; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-subtle); font-weight: 600; padding: 0 12px 9px; border-bottom: 1px solid var(--border); }
+  td { padding: 12px; font-size: 13px; border-bottom: 1px solid var(--divider); vertical-align: top; line-height: 1.5; }
+  td.v { width: 27%; }
+  td .vis { font-weight: 600; color: var(--cm-blue-700); display: block; margin-bottom: 3px; }
+  td .pill { display: inline-block; font-size: 10px; font-weight: 600; background: var(--cm-blue-50); color: var(--cm-blue-500); border-radius: var(--radius-pill); padding: 2px 8px; margin-top: 5px; }
+  td code { font-family: var(--font-mono); font-size: 11.5px; background: var(--neutral-100); padding: 1px 5px; border-radius: 4px; color: var(--cm-blue-700); }
+  td ul { margin: 0; padding-left: 16px; }
+  td li { margin: 2px 0; }
+  tr:last-child td { border-bottom: none; }
+
+  .note { background: var(--cm-blue-50); border: 1px solid var(--cm-blue-100); border-radius: var(--radius-md); padding: 14px 16px; font-size: 12.5px; color: var(--cm-blue-800); margin: 14px 0; line-height: 1.55; }
+  .note b { font-weight: 600; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  ol.steps { font-size: 13px; color: var(--neutral-700); line-height: 1.6; padding-left: 20px; }
+  ol.steps li { margin: 5px 0; }
+  ol.steps code { font-family: var(--font-mono); font-size: 11.5px; background: var(--neutral-100); padding: 1px 5px; border-radius: 4px; color: var(--cm-blue-700); }
+  .foot { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 11px; color: var(--fg-subtle); }
+  @media print { body { background: #fff; } .doc { padding: 0; } .topbar { margin: 0 0 30px; } }
+</style>
+</head>
+<body>
+<div class="doc">
+
+  <div class="topbar">
+    <img src="assets/logo-cm-horizontal-white.png" alt="Concept Medical" />
+    <div class="t">
+      <div class="eyebrow">Developer Build Sheet</div>
+      <h1>Production Dashboard — Power BI Mapping</h1>
+    </div>
+  </div>
+
+  <p class="lead">A visual-by-visual guide to rebuilding the redesigned dashboard natively in Power BI Desktop. Apply the <b>Concept Medical theme JSON</b> first, then build each visual per the table below. Field names assume a star schema with a Date table and a Machine / Item / Batch dimension.</p>
+
+  <h2>Setup — do this first</h2>
+  <div class="rule"></div>
+  <ol class="steps">
+    <li><b>Apply the theme:</b> View → Themes → <code>Browse for themes</code> → select <code>Concept Medical Power BI Theme.json</code> (or the Segoe UI variant).</li>
+    <li><b>Page canvas:</b> set page size to <code>1440 × 1024</code> (Custom) so the layout matches the design. Page background is pre-set to <code>#EEF1F6</code> by the theme.</li>
+    <li><b>Navy command rail:</b> draw a <code>#122248</code> rectangle down the left (or across the top); drop in <code>logo-cm-horizontal-white.png</code>.</li>
+    <li><b>Section nav:</b> use <b>Buttons + Bookmarks</b> (one bookmark per section) or the <b>Page Navigator</b>. Style buttons with the theme's actionButton fill.</li>
+    <li><b>Filters:</b> add <b>Slicers</b> for Unit, Batch, Fiscal Year, Month — set each to <b>Dropdown</b> style.</li>
+  </ol>
+
+  <h2>Data-color order (already in the theme)</h2>
+  <div class="rule"></div>
+  <p class="lead" style="margin-bottom:12px;">Series pick up these colors in order. To pin a specific series, override under <em>Format → Colors</em>.</p>
+  <div class="swatches">
+    <div class="sw"><span class="chip" style="background:#1D4E9F"></span><div><b>Blue 1</b> <em>Capacity / Planned</em><br /><span>#1D4E9F</span></div></div>
+    <div class="sw"><span class="chip" style="background:#00B7F1"></span><div><b>Cyan 2</b> <em>Demand / Actual</em><br /><span>#00B7F1</span></div></div>
+    <div class="sw"><span class="chip" style="background:#213E7B"></span><div><b>Navy 3</b> <em>Lines / accents</em><br /><span>#213E7B</span></div></div>
+    <div class="sw"><span class="chip" style="background:#4D7BBE"></span><div><b>Mid 4</b><br /><span>#4D7BBE</span></div></div>
+    <div class="sw"><span class="chip" style="background:#97DAF8"></span><div><b>Light 5</b><br /><span>#97DAF8</span></div></div>
+    <div class="sw"><span class="chip" style="background:#1E9F6E"></span><div><b>Good</b> <em>positive</em><br /><span>#1E9F6E</span></div></div>
+    <div class="sw"><span class="chip" style="background:#C77700"></span><div><b>Warning</b><br /><span>#C77700</span></div></div>
+    <div class="sw"><span class="chip" style="background:#B11F29"></span><div><b>Bad</b> <em>alert</em><br /><span>#B11F29</span></div></div>
+  </div>
+
+  <h2>01 · KPI Strip</h2>
+  <div class="rule"></div>
+  <table>
+    <thead><tr><th>Visual</th><th>Build</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="v"><span class="vis">KPI Cards (×6)</span><span class="pill">Card / New card</span></td>
+        <td>
+          <ul>
+            <li>Use the <b>New Card (preview)</b> visual — supports reference labels &amp; the colored accent bar. Or stack: rectangle + <b>Card</b> visual.</li>
+            <li>Values: <code>Units Produced</code>, <code>Plan Attainment %</code>, <code>Capacity Util %</code>, <code>Yield FPY %</code>, <code>Rejection Rate %</code>, <code>Running Batches</code>.</li>
+            <li><b>Trend arrow + color:</b> add a MoM measure; set the reference-label font color by <em>Conditional formatting → Rules</em> (≥0 → Good green, &lt;0 → Bad red). Glyph via measure: <code>IF([MoM]&gt;=0,"▲","▼")</code>.</li>
+            <li><b>Left accent bar:</b> thin rectangle behind each card — color by status (blue / green / amber / red).</li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>02 · Production Overview</h2>
+  <div class="rule"></div>
+  <table>
+    <thead><tr><th>Visual</th><th>Build</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="v"><span class="vis">Capacity vs Demand vs Confirmed Orders</span><span class="pill">Line &amp; clustered column</span></td>
+        <td><ul>
+          <li>Shared axis: <code>Month</code>. Column values: <code>Capacity</code>, <code>Demand</code>. Line value: <code>Confirmed Orders</code> (on the secondary axis if scales differ).</li>
+          <li>Series colors auto-map: Capacity → blue, Demand → cyan. Set the line to Navy <code>#213E7B</code>, markers On (white fill).</li>
+        </ul></td>
+      </tr>
+      <tr>
+        <td class="v"><span class="vis">Production Plan vs Actual</span><span class="pill">Clustered column</span></td>
+        <td><ul>
+          <li>Axis <code>Month</code>; values <code>Planned</code> (set to Navy <code>#213E7B</code>), <code>Actual</code> (Cyan <code>#00B7F1</code>).</li>
+          <li>Rounded bar corners + small gap width for the premium look.</li>
+        </ul></td>
+      </tr>
+      <tr>
+        <td class="v"><span class="vis">Finished Goods Output by Month</span><span class="pill">Clustered column</span></td>
+        <td><ul>
+          <li>Axis <code>Month</code>; value <code>FG Output</code>. Single series — Mid blue <code>#3260AD</code>. Turn on data labels (K format).</li>
+        </ul></td>
+      </tr>
+      <tr>
+        <td class="v"><span class="vis">Executive Read callout</span><span class="pill">Smart narrative / Text box</span></td>
+        <td><ul>
+          <li>Navy <code>#122248</code> card. Use a <b>Text box</b> with a dynamic value bound to a DAX measure, or the <b>Smart Narrative</b> visual for auto-generated insight text.</li>
+        </ul></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>03 · Manufacturing Performance</h2>
+  <div class="rule"></div>
+  <table>
+    <thead><tr><th>Visual</th><th>Build</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="v"><span class="vis">Batch Progress Overview (Gantt)</span><span class="pill">Custom visual</span></td>
+        <td><ul>
+          <li>Not a stock visual. Best: <b>"as Timeline / Gantt"</b> or <b>xViz / Craydec Gantt</b> from AppSource. Fields: Task = <code>Batch</code>, Start/End = phase timestamps, Legend = <code>Status</code>.</li>
+          <li><b>No-custom-visual fallback:</b> a 100% <b>stacked horizontal bar</b> per batch with transparent "offset" segments + colored phase segments. Colors: Scheduled <code>#C9D0DC</code>, Running <code>#1D4E9F</code>, Paused <code>#C77700</code>, Completed <code>#1E9F6E</code>, Failed <code>#B11F29</code>.</li>
+        </ul></td>
+      </tr>
+      <tr>
+        <td class="v"><span class="vis">Machine Load Distribution</span><span class="pill">Clustered bar</span></td>
+        <td><ul>
+          <li>Horizontal <b>bar chart</b>: axis <code>Machine ID</code>, value <code>Load %</code>, sorted descending.</li>
+          <li><b>Heat coloring:</b> Format → Bars → Color → <em>fx Conditional formatting</em> → <b>Rules</b>: ≥23% → red <code>#B11F29</code>, 18–23% → amber <code>#C77700</code>, &lt;18% → green <code>#1E9F6E</code>. (Or "Gradient" using theme min/center/max.)</li>
+        </ul></td>
+      </tr>
+      <tr>
+        <td class="v"><span class="vis">FG Output by Item</span><span class="pill">Clustered bar</span></td>
+        <td><ul>
+          <li>Horizontal bar: axis <code>Item</code>, value <code>Output</code>, sort descending. Single blue series <code>#1D4E9F</code>, data labels on.</li>
+        </ul></td>
+      </tr>
+      <tr>
+        <td class="v"><span class="vis">Line Efficiency stats</span><span class="pill">Cards / Multi-row card</span></td>
+        <td><ul>
+          <li><b>Multi-row card</b> for the four mini-stats, or four small Cards. Bottleneck/Spare callouts = text boxes with badge shapes.</li>
+        </ul></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>04 · Quality Metrics</h2>
+  <div class="rule"></div>
+  <table>
+    <thead><tr><th>Visual</th><th>Build</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="v"><span class="vis">Rejection Reasons — Pareto</span><span class="pill">Line &amp; clustered column</span></td>
+        <td><ul>
+          <li>Axis <code>Reason</code> (sorted by count desc). Column = <code>Rejections</code> (blue; highlight the #1 cause red via per-data-point color). Line = <code>Cumulative %</code> measure on the <b>secondary axis</b> (0–100%), colored amber <code>#C77700</code>.</li>
+          <li>Cumulative DAX: <code>DIVIDE( running total of rejections, total rejections )</code> over the sorted reason rank.</li>
+        </ul></td>
+      </tr>
+      <tr>
+        <td class="v"><span class="vis">Yield / First-Pass donuts</span><span class="pill">Donut + Card overlay</span></td>
+        <td><ul>
+          <li>Two <b>Donut</b> charts, inner radius 76%. Yield ring = green <code>#1E9F6E</code> + remainder <code>#E1E6EE</code>; First-Pass = blue <code>#1D4E9F</code> + remainder.</li>
+          <li>Center number: overlay a transparent <b>Card</b> (the donut can't show center text natively).</li>
+        </ul></td>
+      </tr>
+      <tr>
+        <td class="v"><span class="vis">Quality snapshot rates</span><span class="pill">Table / Cards</span></td>
+        <td><ul>
+          <li>Rejection / Rework / Scrap / open NCRs as a compact <b>Table</b> or small Cards with conditional-colored value badges.</li>
+        </ul></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>05 · Inventory · 06 · Targets · Alerts</h2>
+  <div class="rule"></div>
+  <table>
+    <thead><tr><th>Visual</th><th>Build</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="v"><span class="vis">Material Stock Levels</span><span class="pill">Table</span></td>
+        <td><ul>
+          <li><b>Table</b> with columns Material, On hand, Reorder pt, Coverage, Status. Coverage = <b>data bar</b> conditional formatting; Status = icon/text rule (red / amber / green).</li>
+        </ul></td>
+      </tr>
+      <tr>
+        <td class="v"><span class="vis">Targets vs Achievement</span><span class="pill">Bar + constant line / KPI</span></td>
+        <td><ul>
+          <li>Per-product <b>bar chart</b> of attainment %, with an <b>analytics constant line at 100%</b> as the target marker. Bar color by rule (≥100 green, 90–100 blue, &lt;90 amber).</li>
+          <li>Alternative: <b>KPI</b> visuals (value vs target) for the headline goals.</li>
+        </ul></td>
+      </tr>
+      <tr>
+        <td class="v"><span class="vis">Alerts &amp; Critical Issues</span><span class="pill">Table / Smart narrative</span></td>
+        <td><ul>
+          <li>A <b>Table</b> driven by an "Alerts" measure/flag table (Severity, Title, Detail, Area), sorted by severity. Severity = colored badge via conditional formatting.</li>
+          <li>The navy "What needs a decision" panel = <b>Smart Narrative</b> or text box.</li>
+        </ul></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="note">
+    <b>Fidelity expectations.</b> Native Power BI will reach roughly 90% of this design. Rounded corners, soft shadows, and the 14px card radius are handled by the theme. The Gantt and the donut center-labels need the workarounds noted above. For pixel-exact reproduction of any panel, the <b>Deneb (Vega-Lite)</b> or <b>HTML Content</b> custom visuals can render the HTML/SVG directly — useful for the Gantt and bespoke callouts.
+  </div>
+
+  <div class="foot">Concept Medical · Envision Scientific — Manufacturing Intelligence. Companion to <code>Production Dashboard.html</code> and the Power BI theme JSON. Field names are illustrative — map to your model.</div>
+
+</div>
+</body>
+</html>

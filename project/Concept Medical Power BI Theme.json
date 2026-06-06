@@ -1,0 +1,164 @@
+{
+  "name": "Concept Medical — Production",
+  "$schema": "https://raw.githubusercontent.com/microsoft/powerbi-desktop-samples/main/Report%20Theme%20JSON%20Schema/reportThemeSchema-2.139.json",
+
+  "dataColors": [
+    "#1D4E9F",
+    "#00B7F1",
+    "#213E7B",
+    "#4D7BBE",
+    "#97DAF8",
+    "#3260AD",
+    "#1E9F6E",
+    "#C77700",
+    "#B11F29",
+    "#122248"
+  ],
+
+  "foreground": "#1B202B",
+  "foregroundNeutralSecondary": "#4A5267",
+  "foregroundNeutralTertiary": "#9AA3B5",
+  "background": "#FFFFFF",
+  "backgroundLight": "#F7F8FB",
+  "backgroundNeutral": "#EEF1F6",
+  "tableAccent": "#1D4E9F",
+
+  "good": "#1E9F6E",
+  "neutral": "#9AA3B5",
+  "bad": "#B11F29",
+
+  "maximum": "#B11F29",
+  "center": "#C77700",
+  "minimum": "#1E9F6E",
+  "null": "#E1E6EE",
+
+  "hyperlink": "#1D4E9F",
+  "visitedHyperlink": "#213E7B",
+
+  "textClasses": {
+    "callout":   { "fontFace": "Poppins", "fontSize": 32, "color": "#182B53" },
+    "title":     { "fontFace": "Poppins Semibold", "fontSize": 13, "color": "#213E7B" },
+    "header":    { "fontFace": "Poppins Semibold", "fontSize": 12, "color": "#213E7B" },
+    "label":     { "fontFace": "Poppins", "fontSize": 10, "color": "#4A5267" },
+    "largeTitle":{ "fontFace": "Poppins Semibold", "fontSize": 20, "color": "#213E7B" },
+    "largeLabel":{ "fontFace": "Poppins", "fontSize": 12, "color": "#1B202B" },
+    "smallLabel":{ "fontFace": "Poppins", "fontSize": 9,  "color": "#6B7589" },
+    "lightLabel":{ "fontFace": "Poppins", "fontSize": 10, "color": "#9AA3B5" },
+    "boldLabel": { "fontFace": "Poppins Semibold", "fontSize": 10, "color": "#213E7B" }
+  },
+
+  "visualStyles": {
+    "*": {
+      "*": {
+        "background": [{ "show": true, "color": { "solid": { "color": "#FFFFFF" } }, "transparency": 0 }],
+        "border": [{ "show": true, "color": { "solid": { "color": "#E1E6EE" } }, "radius": 14 }],
+        "dropShadow": [{
+          "show": true, "preset": "Custom", "color": { "solid": { "color": "#122248" } },
+          "position": "Outer", "transparency": 92, "blur": 22, "angle": 90, "distance": 6, "spread": 0
+        }],
+        "visualHeader": [{ "show": true, "background": { "solid": { "color": "#FFFFFF" } }, "border": { "solid": { "color": "#FFFFFF" } }, "foreground": { "solid": { "color": "#9AA3B5" } } }],
+        "title": [{
+          "show": true, "fontColor": { "solid": { "color": "#213E7B" } },
+          "background": { "solid": { "color": "#FFFFFF" } },
+          "alignment": "left", "fontSize": 13, "fontFamily": "Poppins Semibold", "bold": true
+        }],
+        "spacing": [{ "customizeSpacing": true, "spaceBelowTitle": 8 }]
+      }
+    },
+
+    "page": {
+      "*": {
+        "background": [{ "color": { "solid": { "color": "#EEF1F6" } }, "transparency": 0 }],
+        "outspace": [{ "color": { "solid": { "color": "#EEF1F6" } }, "transparency": 0 }]
+      }
+    },
+
+    "card": {
+      "*": {
+        "labels": [{ "color": { "solid": { "color": "#182B53" } }, "fontSize": 30, "fontFamily": "Poppins Semibold", "labelPrecision": 1 }],
+        "categoryLabels": [{ "show": true, "color": { "solid": { "color": "#6B7589" } }, "fontSize": 11, "fontFamily": "Poppins" }],
+        "wordWrap": [{ "show": false }]
+      }
+    },
+
+    "cardVisual": {
+      "*": {
+        "calloutValue": [{ "fontColor": { "solid": { "color": "#182B53" } }, "fontFamily": "Poppins Semibold", "fontSize": 30 }],
+        "calloutLabel": [{ "fontColor": { "solid": { "color": "#6B7589" } }, "fontFamily": "Poppins", "fontSize": 11 }]
+      }
+    },
+
+    "kpi": {
+      "*": {
+        "trendline": [{ "show": true }],
+        "indicator": [{ "color": { "solid": { "color": "#1D4E9F" } }, "fontFamily": "Poppins Semibold" }],
+        "goals": [{ "color": { "solid": { "color": "#9AA3B5" } } }]
+      }
+    },
+
+    "slicer": {
+      "*": {
+        "background": [{ "show": true, "color": { "solid": { "color": "#F7F8FB" } } }],
+        "border": [{ "show": true, "color": { "solid": { "color": "#E1E6EE" } }, "radius": 8 }],
+        "header": [{ "show": true, "fontColor": { "solid": { "color": "#9AA3B5" } }, "fontSize": 9, "fontFamily": "Poppins Semibold", "background": { "solid": { "color": "#F7F8FB" } } }],
+        "items": [{ "fontColor": { "solid": { "color": "#213E7B" } }, "fontSize": 12, "fontFamily": "Poppins", "background": { "solid": { "color": "#F7F8FB" } } }]
+      }
+    },
+
+    "columnChart": {
+      "*": {
+        "valueAxis": [{ "show": true, "color": { "solid": { "color": "#6B7589" } }, "fontSize": 10, "fontFamily": "Poppins", "gridlineShow": true, "gridlineColor": { "solid": { "color": "#EEF1F6" } }, "gridlineThickness": 1 }],
+        "categoryAxis": [{ "show": true, "color": { "solid": { "color": "#6B7589" } }, "fontSize": 10, "fontFamily": "Poppins", "showAxisTitle": false }],
+        "legend": [{ "show": true, "position": "Top", "fontColor": { "solid": { "color": "#6B7589" } }, "fontSize": 11, "fontFamily": "Poppins" }]
+      }
+    },
+
+    "barChart": {
+      "*": {
+        "valueAxis": [{ "show": true, "color": { "solid": { "color": "#6B7589" } }, "fontSize": 10, "fontFamily": "Poppins", "gridlineColor": { "solid": { "color": "#EEF1F6" } } }],
+        "categoryAxis": [{ "show": true, "color": { "solid": { "color": "#213E7B" } }, "fontSize": 11, "fontFamily": "Poppins", "showAxisTitle": false }],
+        "legend": [{ "show": true, "position": "Top", "fontColor": { "solid": { "color": "#6B7589" } }, "fontSize": 11, "fontFamily": "Poppins" }]
+      }
+    },
+
+    "lineClusteredColumnComboChart": {
+      "*": {
+        "valueAxis": [{ "show": true, "color": { "solid": { "color": "#6B7589" } }, "fontSize": 10, "fontFamily": "Poppins", "gridlineColor": { "solid": { "color": "#EEF1F6" } }, "secShow": true, "secColor": { "solid": { "color": "#6B7589" } } }],
+        "categoryAxis": [{ "show": true, "color": { "solid": { "color": "#6B7589" } }, "fontSize": 10, "fontFamily": "Poppins", "showAxisTitle": false }],
+        "legend": [{ "show": true, "position": "Top", "fontColor": { "solid": { "color": "#6B7589" } }, "fontSize": 11, "fontFamily": "Poppins" }]
+      }
+    },
+
+    "donutChart": {
+      "*": {
+        "legend": [{ "show": true, "position": "Bottom", "fontColor": { "solid": { "color": "#6B7589" } }, "fontSize": 11, "fontFamily": "Poppins" }],
+        "slices": [{ "innerRadiusRatio": 76 }],
+        "labels": [{ "color": { "solid": { "color": "#1B202B" } }, "fontSize": 10, "fontFamily": "Poppins" }]
+      }
+    },
+
+    "tableEx": {
+      "*": {
+        "grid": [{ "gridVertical": false, "gridHorizontal": true, "gridHorizontalColor": { "solid": { "color": "#EEF1F6" } }, "outlineColor": { "solid": { "color": "#E1E6EE" } }, "rowPadding": 6 }],
+        "columnHeaders": [{ "fontColor": { "solid": { "color": "#9AA3B5" } }, "backColor": { "solid": { "color": "#FFFFFF" } }, "fontSize": 10, "fontFamily": "Poppins Semibold", "bold": true }],
+        "values": [{ "fontColor": { "solid": { "color": "#1B202B" } }, "fontSize": 12, "fontFamily": "Poppins", "backColorPrimary": { "solid": { "color": "#FFFFFF" } }, "backColorSecondary": { "solid": { "color": "#F7F8FB" } } }]
+      }
+    },
+
+    "pivotTable": {
+      "*": {
+        "columnHeaders": [{ "fontColor": { "solid": { "color": "#9AA3B5" } }, "fontSize": 10, "fontFamily": "Poppins Semibold" }],
+        "values": [{ "fontColor": { "solid": { "color": "#1B202B" } }, "fontSize": 12, "fontFamily": "Poppins" }]
+      }
+    },
+
+    "actionButton": {
+      "*": {
+        "fill": [{ "show": true, "fillColor": { "solid": { "color": "#1D4E9F" } }, "transparency": 0 }],
+        "text": [{ "show": true, "fontColor": { "solid": { "color": "#FFFFFF" } }, "fontSize": 12, "fontFamily": "Poppins Semibold" }],
+        "outline": [{ "show": false }],
+        "visualBorder": [{ "show": true, "color": { "solid": { "color": "#1D4E9F" } }, "radius": 8 }]
+      }
+    }
+  }
+}
